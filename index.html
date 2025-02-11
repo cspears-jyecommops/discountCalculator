@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discount Calculator</title>
+    <style>
+        body {
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #16213e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 350px;
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 25%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #0f3460;
+            color: #e0e0e0;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #53354a;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #903749;
+        }
+    </style>
+    <script>
+
+        function solveEquation() {
+            const subtotal = parseFloat(document.getElementById('subtotal').value);
+            const requiredTotal = parseFloat(document.getElementById('requiredTotal').value);
+            const shippingAmount = parseFloat(document.getElementById('shippingAmount').value);
+            const taxPercentage = parseFloat(document.getElementById('taxPercentage').value) / 100;
+
+            const X = (subtotal + shippingAmount) - (requiredTotal / (1 + taxPercentage));
+            document.getElementById('result').innerText = 'Coupon Amount = ' + X.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Discount Calculator</h1>
+        <label for="subtotal">Subtotal:</label>
+        <input type="number" id="subtotal" name="subtotal"><br><br>
+
+        <label for="shipping">Shipping:</label>
+        <input type="number" id="shippingAmount" name="shippingAmount" value="7.99"><br><br>
+        
+        <label for="requiredTotal">Required Total:</label>
+        <input type="number" id="requiredTotal" name="requiredTotal"><br><br>
+        
+        <label for="taxPercentage">Tax Percentage:</label>
+        <input type="number" id="taxPercentage" name="taxPercentage" min="0" max="100"><br><br>
+        
+        <button onclick="solveEquation()">Calculate</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+    document.getElementById('shippingAmount').addEventListener('focus', function() {
+        this.value = '';
+    });
+    </script>
+
+</body>
+</html>
